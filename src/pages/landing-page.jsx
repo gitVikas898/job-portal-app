@@ -1,6 +1,6 @@
 const LandingPage= () => {
   return (
-    <div className="bg-yellow-200">landing-page</div>
+    <div>landing-page</div>
   )
 }
 
