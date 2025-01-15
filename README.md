@@ -5,4 +5,6 @@
     - Setup pages 
     - Created Routing 
     
-    # Working on Landing Page
+# Supabase setup and Authorisation using CLERK 
+
+# Working on Landing Page

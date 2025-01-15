@@ -24,7 +24,7 @@ function App() {
           element:<Onboarding></Onboarding>,
         },
         {
-          path:"/job/id:",
+          path:"/job",
           element:<Job></Job>,
         }
         ,
