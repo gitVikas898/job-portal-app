@@ -25,7 +25,7 @@ function App() {
           element:<ProtectedRoute><Onboarding></Onboarding></ProtectedRoute>,
         },
         {
-          path:"/job/",
+          path:"/job",
           element:<ProtectedRoute><Job></Job></ProtectedRoute> ,
         }
         ,
@@ -48,7 +48,7 @@ function App() {
         }
         ,
         {
-          path:"/list",
+          path:"/jobs",
           element:<ProtectedRoute>
             <Joblisting></Joblisting>
           </ProtectedRoute>,

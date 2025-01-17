@@ -38,7 +38,7 @@ const LandingPage = () => {
       </section>
 
       <div className="flex gap-6 justify-center">
-        <Link to="/job">
+        <Link to="/jobs">
           <Button variant="blue" size="xl">
             Find Job
           </Button>
