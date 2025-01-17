@@ -25,7 +25,7 @@ function App() {
           element:<ProtectedRoute><Onboarding></Onboarding></ProtectedRoute>,
         },
         {
-          path:"/job",
+          path:"/job/:id",
           element:<ProtectedRoute><Job></Job></ProtectedRoute> ,
         }
         ,
