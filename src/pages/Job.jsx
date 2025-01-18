@@ -1,4 +1,12 @@
-import { getSingleJob } from "@/api/apiJobs";
+import { getSingleJob, updateHiringStatus } from "@/api/apiJobs";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import useFetch from "@/hooks/use-fetch";
 import { useUser } from "@clerk/clerk-react";
 import MDEditor from "@uiw/react-md-editor";
@@ -18,6 +26,18 @@ const Job = () => {
   } = useFetch(getSingleJob, {
     job_id: id,
   });
+
+  const { loading: loadingHiringStatus, fn: fnHiringStatus } = useFetch(
+    updateHiringStatus,
+    {
+      job_id: id,
+    }
+  );
+
+  const handleStatusChange = (value) => {
+    const isOpen = value === "open";
+    fnHiringStatus(isOpen).then(() => fnJob());
+  };
 
   useEffect(() => {
     if (isLoaded) fnJob();
@@ -63,18 +83,32 @@ const Job = () => {
       </div>
 
       {/** Hiring Status */}
-      <h2 className="text-2xl sm:text-3xl font-bold" >About the job</h2>
-       <MDEditor.Markdown
-            source={job?.description}
-            className="bg-transparent sm:text-lg"
-          />
-      <h2 className="text-2xl sm:text-3xl font-bold" >What we are looking for : </h2>
-          <MDEditor.Markdown
-            source={job?.requirements}
-            className="bg-transparent sm:text-lg"
-          />
+      {job?.recruiter_id === user?.id && (
+        <Select onValueChange={handleStatusChange}>
+          <SelectTrigger className={`w-full ${job?.isOpen ? "bg-green-950":"bg-red-950"}`}>
+            <SelectValue placeholder={"Hiring Status " + (job?.isOpen ? "(Open)" : "(Closed)")} />
+          </SelectTrigger>
+          <SelectContent>
+                   <SelectItem value="open">Open</SelectItem>
+                   <SelectItem value="closed">Closed</SelectItem>
+          </SelectContent>
+        </Select>
+      )}
 
-          {/** Render Applications */}
+      <h2 className="text-2xl sm:text-3xl font-bold">About the job</h2>
+      <MDEditor.Markdown
+        source={job?.description}
+        className="bg-transparent sm:text-lg"
+      />
+      <h2 className="text-2xl sm:text-3xl font-bold">
+        What we are looking for :{" "}
+      </h2>
+      <MDEditor.Markdown
+        source={job?.requirements}
+        className="bg-transparent sm:text-lg"
+      />
+
+      {/** Render Applications */}
     </div>
   );
 };
