@@ -26,7 +26,7 @@ const schema = z.object({
     .int(),
   skills: z.string().min(1, { message: "Skills are required" }),
 
-  education: z.enum(["Junior", "Intemediate", "Experienced"], {
+  education: z.enum(["Undergraduate", "Graduate", "Post Graduate"], {
     message: "Education is required",
   }),
   resume: z
@@ -120,16 +120,16 @@ const ApplyJobDrawer = ({ user, job, applied = false, fetchJob }) => {
             render={({ field }) => (
               <RadioGroup onValueChange={field.onChange} {...field}>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Junior" id="junior" />
-                  <Label htmlFor="junior">Junior</Label>
+                  <RadioGroupItem value="Undergraduate" id="Undergraduate" />
+                  <Label htmlFor="Undergraduate">Under Grad</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Intermediate" id="intermediate" />
-                  <Label htmlFor="intermediate">Intermediate</Label>
+                  <RadioGroupItem value="Graduate" id="Graduate" />
+                  <Label htmlFor="Graduate">Graduate</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Experienced" id="experienced" />
-                  <Label htmlFor="experienced">Experienced</Label>
+                  <RadioGroupItem value="Post Graduate" id="Post Graduate" />
+                  <Label htmlFor="Post Graduate">Post Graduate</Label>
                 </div>
               </RadioGroup>
             )}
