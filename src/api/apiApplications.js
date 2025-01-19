@@ -53,3 +53,53 @@ export async function updateApplicationStatus(token,{job_id},status) {
 
     return data
 }
+
+export async function getApplications(token,{user_id}) {
+    const supabase = await supabaseClient(token);
+
+    const {data,error} = await supabase
+    .from("applications")
+    .select("*,job:jobs(title,company:companies(name))")
+    .eq("candidate_id",user_id)
+
+    if(error){
+        console.error("Error Showing Applications",error);
+        return null;
+    }
+
+    return data
+}
+
+
+
+export async function addNewJob(token,_,jobData) {
+    const supabase = await supabaseClient(token);
+
+    const {data,error} = await supabase
+    .from("jobs")
+    .insert([jobData])
+    .select();
+
+    if(error){
+        console.error("Error Creating a Job",error);
+        return null;
+    }
+
+    return data
+}
+
+export async function getSavedJobs(token) {
+    const supabase = await supabaseClient(token);
+
+    const {data,error} = await supabase
+    .from("saved_jobs")
+    .select("*,job:jobs(*,company:companies(name,logo_url))");
+
+
+    if(error){
+        console.error("Error Fetching Saved Jobs",error);
+        return null;
+    }
+
+    return data
+}

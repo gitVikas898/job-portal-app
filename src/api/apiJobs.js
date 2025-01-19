@@ -92,3 +92,7 @@ export async function updateHiringStatus(token,{job_id},isOpen) {
 
     return data
 }
+
+
+
+
